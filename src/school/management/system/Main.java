@@ -1,7 +1,3 @@
-package school.management.system;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Rakshith on 4/3/2017.
