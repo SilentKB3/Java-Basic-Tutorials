@@ -1,6 +1,5 @@
 package school.management.system;
 
-import java.util.List;
 
 /**
  * Many teachers, many students.
@@ -9,9 +8,10 @@ import java.util.List;
  * Created by Rakshith on 4/3/2017.
  */
 public class School {
-
-    private List<Teacher> teachers;
-    private List<Student> students;
+    private Teacher[] teachers = new Teacher[5];
+    private Student[] students = new Student[5];
+    private int countOfTeachers = 0;
+    private int countOfStudents = 0;
     private static int  totalMoneyEarned;
     private static int totalMoneySpent;
 
@@ -20,7 +20,7 @@ public class School {
      * @param teachers list of teachers in the school.
      * @param students list of students int the school.
      */
-    public School(List<Teacher> teachers, List<Student> students) {
+    public School(Teacher[] teachers, Student[] students) {
         this.teachers = teachers;
         this.students = students;
         totalMoneyEarned=0;
@@ -31,7 +31,7 @@ public class School {
      *
      * @return the list of teachers int the school.
      */
-    public List<Teacher> getTeachers() {
+    public Teacher[] getTeachers() {
         return teachers;
     }
 
@@ -40,14 +40,20 @@ public class School {
      * @param teacher the teacher to be added.
      */
     public void addTeacher(Teacher teacher) {
-        teachers.add(teacher);
+        if (countOfTeachers == teachers.length)
+        {
+            teachers = resizeTeacher();
+        }
+
+        teachers[countOfTeachers] = teacher;
+        countOfTeachers++;
     }
 
     /**
      *
      * @return the list of students in the school.
      */
-    public List<Student> getStudents() {
+    public Student[] getStudents() {
         return students;
     }
 
@@ -56,7 +62,37 @@ public class School {
      * @param student the student to be added.
      */
     public void addStudent(Student student) {
-        students.add(student);
+        if (countOfStudents == teachers.length)
+        {
+            students = resizeStudent();
+        }
+
+        students[countOfStudents] = student;
+        countOfStudents++;
+    }
+
+    private Teacher[] resizeTeacher()
+    {
+        Teacher[] temp = new Teacher[countOfTeachers * 2];
+
+        for (int i = 0; i < countOfTeachers; i++)
+        {
+            temp[i] = teachers[i];
+        }
+
+        return temp;
+    }
+
+    private Student[] resizeStudent()
+    {
+        Student[] temp = new Student[countOfStudents * 2];
+
+        for (int i = 0; i < countOfStudents; i++)
+        {
+            temp[i] = students[i];
+        }
+
+        return temp;
     }
 
     /**
